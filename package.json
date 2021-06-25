@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"name": "expo-preview-action",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Action workflow for publishing and generating QR code URL for Expo projects.",
 	"main": "build/index.js",
 	"repository": {
