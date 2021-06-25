@@ -15,7 +15,8 @@ inputs:
   scheme:
     description: The deep link scheme
     required: false
-  project-flavor: The type of your project. Available options `development-client` or `expo-go
+  project-flavor:
+    description: The type of your project. Available options `development-client` or `expo-go
     required: false
   project-root:
     description: The path to the folder containing `package.json`
