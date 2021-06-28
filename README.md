@@ -65,6 +65,7 @@ Before you dive into the workflow examples, you should know the basics of GitHub
 You can read more about this in the [GitHub Actions documentation][link-actions].
 
 - [Create a QR code under pull request](#create-a-qr-code-under-pull-request)
+- [Create a preview only if app files were changed](#create-a-preview-only-if-app-files-were-changed)
 
 ### Create a QR code under pull request
 
@@ -76,6 +77,52 @@ It also auto-authenticates when the `token` is provided.
 ---
 name: Create preview
 on: [pull_request]
+jobs:
+  preview:
+    name: Create preview
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up repository
+        uses: actions/checkout@v2
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: Set up Expo
+        uses: expo/expo-github-action@v5
+        with:
+          expo-cache: true
+          expo-version: 4.x
+          expo-token: ${{ secrets.EXPO_TOKEN }}
+      - name: Install dependencies
+        run: yarn install
+      - name: Publish to Expo & create a QR code
+        uses: expo/expo-preview-action@v1
+        with:
+          channel: pr-${{ github.event.number }}
+        id: preview
+      - name: Comment deployment link
+        uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          msg: Awesome! You can [preview the PR here](${{ steps.preview.outputs.EXPO_QR_CODE_URL }}).<br><br><a href="${{ steps.publish.outputs.EXPO_QR_CODE_URL }}"><img src="${{ steps.preview.outputs.EXPO_QR_CODE_URL }}" height="512px" width="512px"></a>
+```
+
+### Create a preview only if app files were changed
+
+Below you can see the example configuration to create a QR code on each pull request, but only if app files were changed. The workflow listens to the pull_request event and sets up Node 14 using the [Setup Node Action](https://help.github.com/en/categories/automating-your-workflow-with-github-actions). It also auto-authenticates when the token is provided.
+
+```yml
+---
+name: Create preview
+on:
+  pull_request:
+    paths:
+      - 'package.json'
+      - 'app.json'
+      - '**/*.js'
+      - '**/*.ts'
 jobs:
   preview:
     name: Create preview
