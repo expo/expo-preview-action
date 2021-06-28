@@ -26,7 +26,7 @@
 
 ## 📦 What's inside?
 
-With this preview action, you can test changes made in pull requests via Expo Go or custom development client just by scanning QR code.
+With this preview action, you can test changes made in pull requests via Expo Go or custom development client (created with [expo-dev-client](https://docs.expo.io/clients/introduction/)) just by scanning QR code.
 
 ## 🔧 Set up
 
@@ -69,7 +69,7 @@ You can read more about this in the [GitHub Actions documentation][link-actions]
 ### Create a QR code under pull request
 
 Below you can see the example configuration to create a QR code on each pull request.
-The workflow listens to the `pull_request` event and sets up Node 14 using the [Setup Node Action][link-actions-node].
+The workflow listens to the `pull_request` event and sets up Node 14 using the [Setup Node Action](https://help.github.com/en/categories/automating-your-workflow-with-github-actions).
 It also auto-authenticates when the `token` is provided.
 
 ```yml
@@ -107,5 +107,3 @@ jobs:
         with:
           msg: Awesome! You can [preview the PR here](${{ steps.preview.outputs.EXPO_QR_CODE_URL }}).<br><br><a href="${{ steps.publish.outputs.EXPO_QR_CODE_URL }}"><img src="${{ steps.preview.outputs.EXPO_QR_CODE_URL }}" height="512px" width="512px"></a>
 ```
-
-[link-actions]: https://help.github.com/en/categories/automating-your-workflow-with-github-actions
