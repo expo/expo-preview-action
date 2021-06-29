@@ -57,7 +57,7 @@ This action is customizable through variables - they are defined in the [action.
 | `project-root`          | ❌       | The path to the folder where package.json lives. Defaults to main directory of the repository.                                                                                                                                         |
 | `expo-cli-path`         | ❌       | The path to the `expo-cli`. If you're using the `expo-github-action` or `expo-cli` was installed in the `bin` folder, you should ignore this option.                                                                                   |
 | `android-manifest-path` | ❌       | The path to the `AndroidManifest.xml`. If `scheme` was provided or you're using the managed workflow, this option is ignored.                                                                                                          |
-| `ios-info-plist-path`   | ❌       | The path to the `Info.plist`. If `scheme` was provided or you're using the managed workflow.                                                                                                                                           |
+| `ios-info-plist-path`   | ❌       | The path to the `Info.plist`. If `scheme` was provided or you're using the managed workflow, this option is ignored.                                                                                                                  |
 
 ## 📝 Example workflows
 
