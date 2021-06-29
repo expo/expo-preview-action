@@ -3,7 +3,7 @@ import { group, getInput, setOutput, info } from '@actions/core';
 import { publish } from './publish';
 import { chooseScheme } from './scheme';
 import { createQRCodeURL } from './url';
-
+import { needNewDevClientBuild } from './github';
 function undefinedIfEmpty(string: string): string | undefined {
 	return string || undefined;
 }
@@ -31,6 +31,7 @@ export async function run(): Promise<void> {
 		projectRoot: undefinedIfEmpty(getInput('project-root')),
 		manifestPath: undefinedIfEmpty(getInput('android-manifest-path')),
 		infoPlist: undefinedIfEmpty(getInput('ios-info-plist-path')),
+		token: getInput('token', { required: true }),
 	};
 
 	const scheme = await group('Choose scheme', async () => {
@@ -47,6 +48,17 @@ export async function run(): Promise<void> {
 		return Promise.resolve(qrCode);
 	});
 
+	const needToRebuildDevClient = await group('Check if a new version of the development client is required', () =>
+		needNewDevClientBuild(config)
+	);
+
 	setOutput('EXPO_MANIFEST_URL', manifestURL);
 	setOutput('EXPO_QR_CODE_URL', QRCodeURL);
+	setOutput('EXPO_NEW_BUILD_IS_REQUIRED', needToRebuildDevClient);
+	setOutput(
+		'EXPO_NEW_BUILD_IS_REQUIRED_MESSAGE',
+		needToRebuildDevClient
+			? `<strong>⚠️ Warning</strong>: To open this preview, you may need to rebuild your development client.`
+			: ''
+	);
 }
