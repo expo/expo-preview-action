@@ -40,6 +40,10 @@ export async function run(): Promise<void> {
 		return scheme;
 	});
 
+	const needToRebuildDevClient = await group('Check if a new version of the development client is required', () =>
+		needNewDevClientBuild(config)
+	);
+
 	const manifestURL = await group('Publish application', () => publish(config));
 
 	const QRCodeURL = await group('Create QRCode', () => {
@@ -48,17 +52,13 @@ export async function run(): Promise<void> {
 		return Promise.resolve(qrCode);
 	});
 
-	const needToRebuildDevClient = await group('Check if a new version of the development client is required', () =>
-		needNewDevClientBuild(config)
-	);
-
 	setOutput('EXPO_MANIFEST_URL', manifestURL);
 	setOutput('EXPO_QR_CODE_URL', QRCodeURL);
 	setOutput('EXPO_NEW_BUILD_IS_REQUIRED', needToRebuildDevClient);
 	setOutput(
 		'EXPO_NEW_BUILD_IS_REQUIRED_MESSAGE',
 		needToRebuildDevClient
-			? `<strong>⚠️ Warning</strong>: To open this preview, you may need to rebuild your development client.`
+			? `<strong>⚠️ Warning</strong>: To open this preview, you may need to rebuild your native application.`
 			: ''
 	);
 }

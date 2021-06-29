@@ -64,7 +64,7 @@ export async function needNewDevClientBuild(config: GithubConfig & ProjectConfig
 
 	const nativeFiles = changedFiles.filter(
 		file =>
-			file.endsWith('.package.json') ||
+			file.endsWith('package.json') ||
 			// Android files
 			file.endsWith('.java') ||
 			file.endsWith('.xml') ||
