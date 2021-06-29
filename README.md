@@ -42,6 +42,8 @@ After adding this action to your workflow, it will publish your project using `e
 
 - `EXPO_MANIFEST_URL` - A URL pointing to the expo manifest of the published version.
 - `EXPO_QR_CODE_URL` - A URL pointing to the generated QR code which can be scanned using Expo Go or custom development client.
+- `EXPO_NEW_BUILD_IS_REQUIRED` - Whether a new build of your application is required to open generated preview.
+- `EXPO_NEW_BUILD_IS_REQUIRED_MESSAGE` - If a new build of your application is required to open generated preview, it will contain a default warning message.
 
 You can use those variables to do whatever you want. For example, you can chain this action with [unsplash/comment-on-pr](https://github.com/unsplash/comment-on-pr) to add a comment with QR code under pull request.
 
@@ -57,7 +59,7 @@ This action is customizable through variables - they are defined in the [action.
 | `project-root`          | ❌       | The path to the folder where package.json lives. Defaults to main directory of the repository.                                                                                                                                         |
 | `expo-cli-path`         | ❌       | The path to the `expo-cli`. If you're using the `expo-github-action` or `expo-cli` was installed in the `bin` folder, you should ignore this option.                                                                                   |
 | `android-manifest-path` | ❌       | The path to the `AndroidManifest.xml`. If `scheme` was provided or you're using the managed workflow, this option is ignored.                                                                                                          |
-| `ios-info-plist-path`   | ❌       | The path to the `Info.plist`. If `scheme` was provided or you're using the managed workflow, this option is ignored.                                                                                                                  |
+| `ios-info-plist-path`   | ❌       | The path to the `Info.plist`. If `scheme` was provided or you're using the managed workflow, this option is ignored.                                                                                                                   |
 
 ## 📝 Example workflows
 
@@ -106,7 +108,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          msg: Awesome! You can [preview the PR here](${{ steps.preview.outputs.EXPO_QR_CODE_URL }}).<br><br><a href="${{ steps.publish.outputs.EXPO_QR_CODE_URL }}"><img src="${{ steps.preview.outputs.EXPO_QR_CODE_URL }}" height="512px" width="512px"></a>
+          msg: >
+            Awesome! You can [preview the PR here](${{ steps.preview.outputs.EXPO_QR_CODE_URL }}).<br><br>
+            <a href="${{ steps.publish.outputs.EXPO_QR_CODE_URL }}"><img src="${{ steps.preview.outputs.EXPO_QR_CODE_URL }}" height="512px" width="512px"></a>
+            <br><br>
+            ${{ steps.publish.outputs.EXPO_NEW_BUILD_IS_REQUIRED_MESSAGE }}
 ```
 
 ### Create a preview only if app files were changed
@@ -152,5 +158,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          msg: Awesome! You can [preview the PR here](${{ steps.preview.outputs.EXPO_QR_CODE_URL }}).<br><br><a href="${{ steps.publish.outputs.EXPO_QR_CODE_URL }}"><img src="${{ steps.preview.outputs.EXPO_QR_CODE_URL }}" height="512px" width="512px"></a>
+          msg: >
+            Awesome! You can [preview the PR here](${{ steps.preview.outputs.EXPO_QR_CODE_URL }}).<br><br>
+            <a href="${{ steps.publish.outputs.EXPO_QR_CODE_URL }}"><img src="${{ steps.preview.outputs.EXPO_QR_CODE_URL }}" height="512px" width="512px"></a>
+            <br><br>
+            ${{ steps.publish.outputs.EXPO_NEW_BUILD_IS_REQUIRED_MESSAGE }}
 ```

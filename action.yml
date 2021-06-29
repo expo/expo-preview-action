@@ -30,3 +30,10 @@ inputs:
   ios-info-plist-path:
     description: The path to the `Info.plist`
     required: false
+  token:
+    description: >
+      GitHub token for GitHub API requests.
+      You shouldn't need to set this themselves, but we recommend using a service account with the least permissions necessary if you want to do it.
+      [Learn more about creating and using encrypted secrets](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets)
+    default: ${{ github.token }}
+    required: true

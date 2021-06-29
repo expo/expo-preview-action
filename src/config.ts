@@ -19,4 +19,8 @@ export type PlatformSpecificProjectConfig = ProjectConfig & {
 	infoPlist?: string;
 };
 
-export type Config = PlatformSpecificProjectConfig & PublishConfig;
+export type GithubConfig = {
+	token: string;
+};
+
+export type Config = PlatformSpecificProjectConfig & PublishConfig & GithubConfig;
