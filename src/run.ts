@@ -4,6 +4,7 @@ import { publish } from './publish';
 import { chooseScheme } from './scheme';
 import { createQRCodeURL } from './url';
 import { needNewDevClientBuild } from './github';
+
 function undefinedIfEmpty(string: string): string | undefined {
 	return string || undefined;
 }
