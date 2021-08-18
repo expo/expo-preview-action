@@ -14,7 +14,9 @@ export function findManifestUrl(text: string): string {
 
 export async function publish(config: PublishConfig): Promise<string> {
 	const { exitCode, stderr, stdout } = await getExecOutput(
-		`${config.cliPath} publish ${config.projectRoot || ''} --release-channel=${config.channel}`
+		`${config.cliPath} publish --release-channel=${config.channel}`,
+		undefined,
+		{ cwd: config.projectRoot },
 	);
 	if (exitCode !== 0) {
 		throw new Error(stderr);
