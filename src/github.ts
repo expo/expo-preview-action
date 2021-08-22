@@ -1,4 +1,4 @@
-import { info } from '@actions/core';
+import { info, warning } from '@actions/core';
 import { GithubConfig, ProjectConfig, ProjectFlavor } from './config';
 import { context, getOctokit } from '@actions/github';
 
@@ -49,7 +49,9 @@ async function getChangedFiles(config: GithubConfig): Promise<string[]> {
 	}
 
 	if (compareResponse.data.status !== 'ahead') {
-		throw new Error(`The head commit for this ${context.eventName} event is not ahead of the base commit.`);
+		warning(`The head commit for this ${context.eventName} event is not ahead of the base commit.`);
+		warning('Skipping the changed file check.');
+		return [];
 	}
 
 	return (compareResponse.data.files || []).map(file => file.filename);
