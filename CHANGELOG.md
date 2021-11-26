@@ -1,3 +1,10 @@
+## [1.2.0](https://github.com/expo/expo-preview-action/compare/1.1.0...1.2.0) (2021-11-26)
+
+
+### New features
+
+* use Expo QR codes for Expo Go previews ([#9](https://github.com/expo/expo-preview-action/issues/9)) ([4d9fe77](https://github.com/expo/expo-preview-action/commit/4d9fe77accd57d77717805bcb8813cddb6b32892))
+
 ## [1.1.0](https://github.com/expo/expo-preview-action/compare/1.0.1...1.1.0) (2021-09-07)
 
 
