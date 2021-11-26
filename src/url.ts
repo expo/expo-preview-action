@@ -1,13 +1,35 @@
+import { URL } from 'url';
+import qs from 'querystring';
+
 import { ProjectFlavor } from './config';
 
-const generateQRCodeBaseURLForGo = 'https://api.qrserver.com/v1/create-qr-code';
-const generateQRCodeBaseURLForBare = 'https://us-central1-exponentjs.cloudfunctions.net';
+type ExpoGoParams = {
+	host: string;
+	owner: string;
+	slug: string;
+	releaseChannel?: string;
+};
+
+function getExpoGoParams(manifestURL: string): ExpoGoParams {
+	const url = new URL(manifestURL);
+	const [owner, slug] = url.pathname.replace('/@', '').split('/', 2);
+
+	return {
+		owner,
+		slug,
+		host: url.hostname,
+		releaseChannel: url.searchParams.get('release-channel') || undefined,
+	};
+}
+
+const generateQRCodeBaseURL = 'https://us-central1-exponentjs.cloudfunctions.net/generateQRCode';
 
 export function createQRCodeURL(projectFlavor: ProjectFlavor, manifestURL: string, scheme: string): string {
 	if (projectFlavor === ProjectFlavor.DevelopmentClient) {
-		return `${generateQRCodeBaseURLForBare}/generateQRCode/development-client?appScheme=${scheme}&url=${manifestURL}`;
+		return `${generateQRCodeBaseURL}/development-client?appScheme=${scheme}&url=${manifestURL}`;
 	} else if (projectFlavor === ProjectFlavor.ExpoGo) {
-		return `${generateQRCodeBaseURLForGo}?size=512x512&data=${manifestURL.replace('https://', 'exp://')}`;
+		const params = getExpoGoParams(manifestURL);
+		return `${generateQRCodeBaseURL}/expo-go?${qs.stringify(params)}`;
 	}
 
 	throw new Error('Unknown project flavor.');
