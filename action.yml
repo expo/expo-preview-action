@@ -1,5 +1,5 @@
 ---
-name: Expo GitHub Action
+name: Expo GitHub Action - Fork
 author: Expo
 description: Expo CLI in your GitHub Actions workflow.
 branding:
