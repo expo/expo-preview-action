@@ -1,9 +1,14 @@
-import { Config, ProjectFlavor } from './config';
-import { group, getInput, setOutput, info } from '@actions/core';
-import { publish } from './publish';
-import { chooseScheme } from './scheme';
-import { createQRCodeURL } from './url';
-import { needNewDevClientBuild } from './github';
+import { chooseScheme } from "./scheme"
+import { Config, ProjectFlavor } from "./config"
+import { createQRCodeURL } from "./url"
+import {
+	getInput,
+	group,
+	info,
+	setOutput
+	} from "@actions/core"
+import { needNewDevClientBuild } from "./github"
+import { publish } from "./publish"
 
 function undefinedIfEmpty(string: string): string | undefined {
 	return string || undefined;
@@ -45,7 +50,7 @@ export async function run(): Promise<void> {
 		needNewDevClientBuild(config)
 	);
 
-	const manifestURL = await group('Publish application', () => publish(config));
+	const { manifestURL, projectPageURL } = await group('Publish application', () => publish(config));
 
 	const QRCodeURL = await group('Create QRCode', () => {
 		const qrCode = createQRCodeURL(config.projectFlavor, manifestURL, scheme);
@@ -54,6 +59,7 @@ export async function run(): Promise<void> {
 	});
 
 	setOutput('EXPO_MANIFEST_URL', manifestURL);
+	setOutput('EXPO_PROJECT_URL', projectPageURL);
 	setOutput('EXPO_QR_CODE_URL', QRCodeURL);
 	setOutput('EXPO_NEW_BUILD_IS_REQUIRED', needToRebuildDevClient);
 	setOutput(
