@@ -32,7 +32,7 @@ With this preview action, you can test changes made in pull requests via Expo Go
 
 This action requires `expo-cli` to be set up in your action environment. You can do it by yourself, but we encourage you to use [expo-github-action](https://github.com/expo/expo-github-action) to make this process as easy as possible.
 
-> Note: You need to be login into `expo-cli`. [See (https://github.com/expo/expo-github-action#automatic-expo-login)].
+> Note: You need to be logged in to `expo-cli`  ([expo automatic login](https://github.com/expo/expo-github-action#automatic-expo-login)).
 
 > ⚠️ If you're using a custom development client, your native project needs to contain configured `expo-updates` to be able to open published applications.
 
@@ -53,21 +53,26 @@ This action is customizable through variables - they are defined in the [action.
 
 | variable                | required | description                                                                                                                                                                                                                            |
 | ----------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `channel`               | ✔️       | The name of the update channel where your application will be published. [Learn more](https://docs.expo.io/distribution/release-channels/).                                                                                            |
-| `project-flavor`        | ❌       | The type of the project. Available options: 'development-client' or 'expo-go'. Defaults to 'development-client'.                                                                                                                       |
-| `scheme`                | ❌       | The deep link scheme which will be used to open your project. This value isn't required, but we recommend setting it. Otherwise, action tries to guess the value. If you are using Expo Go to preview changes, this option is ignored. |
-| `project-root`          | ❌       | The path to the folder where package.json lives. Defaults to main directory of the repository.                                                                                                                                         |
-| `expo-cli-path`         | ❌       | The path to the `expo-cli`. If you're using the `expo-github-action` or `expo-cli` was installed in the `bin` folder, you should ignore this option.                                                                                   |
-| `android-manifest-path` | ❌       | The path to the `AndroidManifest.xml`. If `scheme` was provided or you're using the managed workflow, this option is ignored.                                                                                                          |
-| `ios-info-plist-path`   | ❌       | The path to the `Info.plist`. If `scheme` was provided or you're using the managed workflow, this option is ignored.                                                                                                                   |
+| `channel`               | ✔️        | The name of the update channel where your application will be published. [Learn more](https://docs.expo.io/distribution/release-channels/).                                                                                            |
+| `project-flavor`        | ❌        | The type of the project. Available options: 'development-client' or 'expo-go'. Defaults to 'development-client'.                                                                                                                       |
+| `scheme`                | ❌        | The deep link scheme which will be used to open your project. This value isn't required, but we recommend setting it. Otherwise, action tries to guess the value. If you are using Expo Go to preview changes, this option is ignored. |
+| `project-root`          | ❌        | The path to the folder where package.json lives. Defaults to main directory of the repository.                                                                                                                                         |
+| `expo-cli-path`         | ❌        | The path to the `expo-cli`. If you're using the `expo-github-action` or `expo-cli` was installed in the `bin` folder, you should ignore this option.                                                                                   |
+| `android-manifest-path` | ❌        | The path to the `AndroidManifest.xml`. If `scheme` was provided or you're using the managed workflow, this option is ignored.                                                                                                          |
+| `ios-info-plist-path`   | ❌        | The path to the `Info.plist`. If `scheme` was provided or you're using the managed workflow, this option is ignored.                                                                                                                   |
 
 ## 📝 Example workflows
 
 Before you dive into the workflow examples, you should know the basics of GitHub Actions.
 You can read more about this in the [GitHub Actions documentation][link-actions].
 
-- [Create a QR code under pull request](#create-a-qr-code-under-pull-request)
-- [Create a preview only if app files were changed](#create-a-preview-only-if-app-files-were-changed)
+- [📦 What's inside?](#-whats-inside)
+- [🔧 Set up](#-set-up)
+- [🏃‍♂️ How it works](#️-how-it-works)
+- [⚙️ Configuration options](#️-configuration-options)
+- [📝 Example workflows](#-example-workflows)
+  - [Create a QR code under pull request](#create-a-qr-code-under-pull-request)
+  - [Create a preview only if app files were changed](#create-a-preview-only-if-app-files-were-changed)
 
 ### Create a QR code under pull request
 
