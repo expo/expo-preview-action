@@ -1,7 +1,7 @@
 <div align="center">
   <h1>expo preview action</h1>
   <p></p>
-  <p>Create a fast preview under each pull request to test changes in your <a href="https://github.com/expo/expo">Expo</a> app with Github Actions!</p>
+  <p>This action allows you to automate expo build previews on pull requests to test your <a href="https://github.com/expo/expo">Expo</a> app builds!</p>
   <sup>
     <a href="https://github.com/expo/expo-preview-action/releases">
       <img src="https://img.shields.io/github/release/expo/expo-preview-action/all.svg?style=flat-square" alt="releases" />
@@ -38,14 +38,15 @@ This action requires `expo-cli` to be set up in your action environment. You can
 
 ## 🏃‍♂️ How it works
 
-After adding this action to your workflow, it will publish your project using `expo-cli` and produce as an output two variables:
+This action will publish your project (to your configured `channel`) using `expo-cli` and produce output with the following variables:
 
 - `EXPO_MANIFEST_URL` - A URL pointing to the expo manifest of the published version.
 - `EXPO_QR_CODE_URL` - A URL pointing to the generated QR code which can be scanned using Expo Go or custom development client.
+- `EXPO_PROJECT_URL` - URL pointing to the expo project page with customizable QR code and deep link. This page lets you get the code/url for varying clients (expo go, or your expo development build). More on project pages [here](https://github.com/expo/fyi/blob/main/project-page.md).
 - `EXPO_NEW_BUILD_IS_REQUIRED` - Whether a new build of your application is required to open generated preview.
 - `EXPO_NEW_BUILD_IS_REQUIRED_MESSAGE` - If a new build of your application is required to open generated preview, it will contain a default warning message.
 
-You can use those variables to do whatever you want. For example, you can chain this action with [unsplash/comment-on-pr](https://github.com/unsplash/comment-on-pr) to add a comment with QR code under pull request.
+You can use those variables to do whatever you want. For example, you can chain this action with [unsplash/comment-on-pr](https://github.com/unsplash/comment-on-pr) to add a comment with QR code under pull request. See [example workflows below](#-example-workflows)
 
 ## ⚙️ Configuration options
 
@@ -64,7 +65,7 @@ This action is customizable through variables - they are defined in the [action.
 ## 📝 Example workflows
 
 Before you dive into the workflow examples, you should know the basics of GitHub Actions.
-You can read more about this in the [GitHub Actions documentation][link-actions].
+You can read more about this in the [GitHub Actions documentation](https://docs.github.com/en/actions).
 
 - [📦 What's inside?](#-whats-inside)
 - [🔧 Set up](#-set-up)
@@ -114,8 +115,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           msg: >
-            Awesome! You can [preview the PR here](${{ steps.preview.outputs.EXPO_QR_CODE_URL }}).<br><br>
+            You can [preview the PR here](${{ steps.preview.outputs.EXPO_QR_CODE_URL }}).<br><br>
             <a href="${{ steps.publish.outputs.EXPO_QR_CODE_URL }}"><img src="${{ steps.preview.outputs.EXPO_QR_CODE_URL }}" height="512px" width="512px"></a>
+            <br><br>
+            QR code not working or need a different client? Try the QR code or deep link from the [project page](${{steps.preview.outputs.EXPO_PROJECT_URL}}).
             <br><br>
             ${{ steps.publish.outputs.EXPO_NEW_BUILD_IS_REQUIRED_MESSAGE }}
 ```

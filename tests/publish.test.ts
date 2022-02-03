@@ -31,6 +31,7 @@ Processing asset bundle patterns:
 
 [15:24:41] 📝  Manifest: https://exp.host/@lukaszkosmaty/tabs/index.exp?release-channel=pr-3&sdkVersion=41.0.0 Learn more: expo.fyi/manifest-url
 [15:24:42] ⚙️   Project page: https://expo.dev/@markwas/here?release-channel=pr-3 Learn more: https://expo.fyi/project-page
+
 `;
 		const projectPageUrl = findProjectPage(expoPublishOutput);
 		expect(projectPageUrl).toBe('https://expo.dev/@markwas/here?release-channel=pr-3');
