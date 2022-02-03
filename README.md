@@ -46,7 +46,7 @@ This action will publish your project (to your configured `channel`) using `expo
 - `EXPO_NEW_BUILD_IS_REQUIRED` - Whether a new build of your application is required to open generated preview.
 - `EXPO_NEW_BUILD_IS_REQUIRED_MESSAGE` - If a new build of your application is required to open generated preview, it will contain a default warning message.
 
-You can use those variables to do whatever you want. For example, you can chain this action with [unsplash/comment-on-pr](https://github.com/unsplash/comment-on-pr) to add a comment with QR code under pull request. See [example workflows below](#-example-workflows)
+You can use those variables to do whatever you want. For example, you can chain this action with [unsplash/comment-on-pr](https://github.com/unsplash/comment-on-pr) to add a comment with QR code under pull request. See [example workflows below](#-example-workflows).
 
 ## ⚙️ Configuration options
 
