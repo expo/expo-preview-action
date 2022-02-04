@@ -1,5 +1,5 @@
-import { getExecOutput } from "@actions/exec"
-import { PublishConfig } from "./config"
+import { getExecOutput } from '@actions/exec';
+import { PublishConfig } from './config';
 
 export function findManifestUrl(text: string): string {
 	const regex = /📝 {2}Manifest: ([^ ]*)/;

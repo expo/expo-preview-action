@@ -1,4 +1,4 @@
-import { findManifestUrl, findProjectPage } from "../src/publish"
+import { findManifestUrl, findProjectPage } from '../src/publish';
 
 describe('findProjectPageURL', () => {
 	it('should find project page URL', () => {

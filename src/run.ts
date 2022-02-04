@@ -1,14 +1,9 @@
-import { chooseScheme } from "./scheme"
-import { Config, ProjectFlavor } from "./config"
-import { createQRCodeURL } from "./url"
-import {
-	getInput,
-	group,
-	info,
-	setOutput
-	} from "@actions/core"
-import { needNewDevClientBuild } from "./github"
-import { publish } from "./publish"
+import { Config, ProjectFlavor } from './config';
+import { group, getInput, setOutput, info } from '@actions/core';
+import { publish } from './publish';
+import { chooseScheme } from './scheme';
+import { createQRCodeURL } from './url';
+import { needNewDevClientBuild } from './github';
 
 function undefinedIfEmpty(string: string): string | undefined {
 	return string || undefined;
