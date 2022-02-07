@@ -1,3 +1,10 @@
+### [1.2.1](https://github.com/expo/expo-preview-action/compare/1.2.0...1.2.1) (2022-02-07)
+
+
+### Bug fixes
+
+* Use spaces instead of tabs ([c42854b](https://github.com/expo/expo-preview-action/commit/c42854bf4e635ef94e41e05569307afe37d5e344))
+
 ## [1.2.0](https://github.com/expo/expo-preview-action/compare/1.1.0...1.2.0) (2021-11-26)
 
 
