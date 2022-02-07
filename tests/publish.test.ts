@@ -1,8 +1,8 @@
 import { findManifestUrl, findProjectPage } from '../src/publish';
 
 describe('findProjectPageURL', () => {
-	it('should find project page URL', () => {
-		const expoPublishOutput = `
+  it('should find project page URL', () => {
+    const expoPublishOutput = `
 [15:22:15] › Expo SDK: 41.0.0
 [15:22:15] › Release channel: pr-3
 [15:22:15] › Workflow: Bare
@@ -33,20 +33,20 @@ Processing asset bundle patterns:
 [15:24:42] ⚙️   Project page: https://expo.dev/@markwas/here?release-channel=pr-3 Learn more: https://expo.fyi/project-page
 
 `;
-		const projectPageUrl = findProjectPage(expoPublishOutput);
-		expect(projectPageUrl).toBe('https://expo.dev/@markwas/here?release-channel=pr-3');
-	});
+    const projectPageUrl = findProjectPage(expoPublishOutput);
+    expect(projectPageUrl).toBe('https://expo.dev/@markwas/here?release-channel=pr-3');
+  });
 
-	it('should throw if cannot find project page URL', () => {
-		expect(() => {
-			const expoPublishOutput = 'nothing to see here...';
-			findManifestUrl(expoPublishOutput);
-		}).toThrow();
-	});
+  it('should throw if cannot find project page URL', () => {
+    expect(() => {
+      const expoPublishOutput = 'nothing to see here...';
+      findManifestUrl(expoPublishOutput);
+    }).toThrow();
+  });
 });
 describe('findManifestUrl', () => {
-	it('should find manifest URL', () => {
-		const expoPublishOutput = `
+  it('should find manifest URL', () => {
+    const expoPublishOutput = `
 [15:22:15] › Expo SDK: 41.0.0
 [15:22:15] › Release channel: pr-3
 [15:22:15] › Workflow: Bare
@@ -75,14 +75,14 @@ Processing asset bundle patterns:
 
 [15:24:41] 📝  Manifest: https://exp.host/@lukaszkosmaty/tabs/index.exp?release-channel=pr-3&sdkVersion=41.0.0 Learn more: expo.fyi/manifest-url
 `;
-		const manifestURL = findManifestUrl(expoPublishOutput);
+    const manifestURL = findManifestUrl(expoPublishOutput);
 
-		expect(manifestURL).toBe('https://exp.host/@lukaszkosmaty/tabs/index.exp?release-channel=pr-3&sdkVersion=41.0.0');
-	});
+    expect(manifestURL).toBe('https://exp.host/@lukaszkosmaty/tabs/index.exp?release-channel=pr-3&sdkVersion=41.0.0');
+  });
 
-	it('should throw if cannot find manifest URL', () => {
-		expect(() => {
-			findManifestUrl('Missing manifest URL');
-		}).toThrow();
-	});
+  it('should throw if cannot find manifest URL', () => {
+    expect(() => {
+      findManifestUrl('Missing manifest URL');
+    }).toThrow();
+  });
 });
