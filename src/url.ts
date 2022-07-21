@@ -22,7 +22,7 @@ function getExpoGoParams(manifestURL: string): ExpoGoParams {
   };
 }
 
-const generateQRCodeBaseURL = 'https://us-central1-exponentjs.cloudfunctions.net/generateQRCode';
+const generateQRCodeBaseURL = 'https://qr.expo.dev';
 
 export function createQRCodeURL(projectFlavor: ProjectFlavor, manifestURL: string, scheme: string): string {
   if (projectFlavor === ProjectFlavor.DevelopmentClient) {
