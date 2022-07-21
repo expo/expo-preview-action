@@ -97,11 +97,10 @@ jobs:
         with:
           node-version: 14.x
       - name: Set up Expo
-        uses: expo/expo-github-action@v5
+        uses: expo/expo-github-action@v7
         with:
-          expo-cache: true
-          expo-version: 4.x
-          expo-token: ${{ secrets.EXPO_TOKEN }}
+          expo-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
       - name: Install dependencies
         run: yarn install
       - name: Publish to Expo & create a QR code
@@ -149,11 +148,10 @@ jobs:
         with:
           node-version: 14.x
       - name: Set up Expo
-        uses: expo/expo-github-action@v5
+        uses: expo/expo-github-action@v7
         with:
-          expo-cache: true
-          expo-version: 4.x
-          expo-token: ${{ secrets.EXPO_TOKEN }}
+          expo-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
       - name: Install dependencies
         run: yarn install
       - name: Publish to Expo & create a QR code
