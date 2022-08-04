@@ -1,5 +1,5 @@
 ---
-name: Expo GitHub Action
+name: Expo Preview Action
 author: Expo
 description: Expo CLI in your GitHub Actions workflow.
 branding:
