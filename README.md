@@ -1,3 +1,8 @@
+# ⚠️ DEPRECATION
+
+This repository is considered deprecated. For the new version of this tool please go to [expo-github-action](https://github.com/expo/expo-github-action).
+
+
 <div align="center">
   <h1>expo preview action</h1>
   <p></p>
